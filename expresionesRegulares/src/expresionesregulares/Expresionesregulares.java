@@ -5,6 +5,7 @@
  */
 package expresionesregulares;
 
+import java.awt.Component;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -20,6 +21,7 @@ public class Expresionesregulares extends javax.swing.JFrame {
      */
     public Expresionesregulares() {
         initComponents();
+        
     }
 
     /**
@@ -36,12 +38,13 @@ public class Expresionesregulares extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jBaceptar = new javax.swing.JButton();
+        jPtextos = new javax.swing.JPanel();
+        jTFCorreos = new javax.swing.JTextField();
+        jTFTelefono = new javax.swing.JTextField();
         jTFDNI = new javax.swing.JTextField();
         jTFNombre = new javax.swing.JTextField();
         jTFApellido = new javax.swing.JTextField();
-        jTFCorreos = new javax.swing.JTextField();
-        jTFTelefono = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,10 +58,33 @@ public class Expresionesregulares extends javax.swing.JFrame {
 
         jLabel5.setText("Teléfono:");
 
-        jButton1.setText("Aceptar");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jBaceptar.setText("Aceptar");
+        jBaceptar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                jBaceptarMouseClicked(evt);
+            }
+        });
+        jBaceptar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jBaceptarKeyPressed(evt);
+            }
+        });
+
+        jTFCorreos.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTFCorreosFocusLost(evt);
+            }
+        });
+
+        jTFTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTFTelefonoKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFTelefonoKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFTelefonoKeyTyped(evt);
             }
         });
 
@@ -68,75 +94,106 @@ public class Expresionesregulares extends javax.swing.JFrame {
             }
         });
 
+        jTFNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTFNombreFocusLost(evt);
+            }
+        });
+
+        jTFApellido.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTFApellidoFocusLost(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPtextosLayout = new javax.swing.GroupLayout(jPtextos);
+        jPtextos.setLayout(jPtextosLayout);
+        jPtextosLayout.setHorizontalGroup(
+            jPtextosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPtextosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPtextosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTFTelefono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFDNI, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFApellido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFCorreos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+        jPtextosLayout.setVerticalGroup(
+            jPtextosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPtextosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTFDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(jTFNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTFApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTFCorreos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(jTFTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(56, 56, 56))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTFDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTFNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTFApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                        .addComponent(jTFCorreos, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addComponent(jTFTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
+                        .addGap(10, 10, 10)
+                        .addComponent(jBaceptar))
+                    .addComponent(jPtextos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTFDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTFNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTFApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTFCorreos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTFTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(55, 55, 55)
-                .addComponent(jButton1)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2)
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel3)
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel5))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jPtextos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jBaceptar)))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void jBaceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBaceptarMouseClicked
         
         
         //comprobacion nombre
         Pattern p=Pattern.compile("");
         Matcher m=p.matcher(jTFDNI.getText());
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_jBaceptarMouseClicked
 
     private void jTFDNIFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFDNIFocusLost
        //comprobacion dni
@@ -145,10 +202,88 @@ public class Expresionesregulares extends javax.swing.JFrame {
         if (m.matches())
             jTFDNI.setEnabled(false);
         else 
-            JOptionPane.showMessageDialog(null, "dni es incorrecto");
+            JOptionPane.showMessageDialog(null, "dni esta mal escrito");
             
         
     }//GEN-LAST:event_jTFDNIFocusLost
+
+    private void jTFNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFNombreFocusLost
+        Pattern p=Pattern.compile("[a-zA-Z]+");
+        Matcher m=p.matcher(jTFNombre.getText());
+        if (m.matches())
+            jTFNombre.setEnabled(false);
+        else 
+            JOptionPane.showMessageDialog(null, "Nombre esta mal escrito");
+    }//GEN-LAST:event_jTFNombreFocusLost
+
+    private void jTFApellidoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFApellidoFocusLost
+        Pattern p=Pattern.compile("[a-zA-Z]+");
+        Matcher m=p.matcher(jTFApellido.getText());
+        if (m.matches())
+            jTFApellido.setEnabled(false);
+        else 
+            JOptionPane.showMessageDialog(null, "Apellido esta mal escrito");
+    }//GEN-LAST:event_jTFApellidoFocusLost
+
+    private void jTFCorreosFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFCorreosFocusLost
+        Pattern p=Pattern.compile("[-\\w\\.]+@[\\.\\w]+\\.\\w+");
+        Matcher m=p.matcher(jTFCorreos.getText());
+        if (m.matches())
+            jTFCorreos.setEnabled(false);
+        else 
+            JOptionPane.showMessageDialog(null, "Correo esta mal escrito");
+        
+    }//GEN-LAST:event_jTFCorreosFocusLost
+
+    private void jTFTelefonoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFTelefonoKeyPressed
+      
+    }//GEN-LAST:event_jTFTelefonoKeyPressed
+
+    private void jTFTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFTelefonoKeyTyped
+        
+    }//GEN-LAST:event_jTFTelefonoKeyTyped
+
+    private void jBaceptarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBaceptarKeyPressed
+        boolean bien=true;
+        Component[] com = jPtextos.getComponents();
+        for (Component component : com) {
+            
+            if (component.isEnabled()) {
+                component.requestFocus();
+            }
+        }
+        if(bien){
+        jBaceptar.setEnabled(false);
+        }else{
+           JOptionPane.showMessageDialog(null, "Compruebe el contenido") ;
+        }   
+    }//GEN-LAST:event_jBaceptarKeyPressed
+
+    private void jTFTelefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFTelefonoKeyReleased
+        String telefono=jTFTelefono.getText();
+        if(telefono.length()==3||telefono.length()==6||telefono.length()==9){
+            telefono+="-";
+            jTFTelefono.setText(telefono);
+        }else if(telefono.length()==12){
+        Pattern p=Pattern.compile("[0-9]{3}[-][0-9]{2}[-][0-9]{2}[-][0-9]{2}");
+        Matcher m=p.matcher(jTFTelefono.getText());
+        if (m.matches())
+            jTFTelefono.setEnabled(false);
+        else 
+            JOptionPane.showMessageDialog(null, "Telefono esta mal escrito");
+        boolean bien=true;
+        Component[] com = jPtextos.getComponents();
+        for (Component component : com) {
+            
+            if (component.isEnabled()) {
+                component.requestFocus();
+            }
+        }
+        }
+         
+        
+        
+    }//GEN-LAST:event_jTFTelefonoKeyReleased
 
     /**
      * @param args the command line arguments
@@ -186,12 +321,13 @@ public class Expresionesregulares extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jBaceptar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPtextos;
     private javax.swing.JTextField jTFApellido;
     private javax.swing.JTextField jTFCorreos;
     private javax.swing.JTextField jTFDNI;
